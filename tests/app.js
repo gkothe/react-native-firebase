@@ -1,47 +1,18 @@
-/*
- * Copyright (c) 2016-present Invertase Limited & Contributors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this library except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-import '@react-native-firebase/admob';
-import '@react-native-firebase/analytics';
-import firebase from '@react-native-firebase/app';
-import NativeEventEmitter from '@react-native-firebase/app/lib/internal/RNFBNativeEventEmitter';
-import '@react-native-firebase/app/lib/utils';
-import '@react-native-firebase/auth';
-import '@react-native-firebase/crashlytics';
-import '@react-native-firebase/database';
-import '@react-native-firebase/dynamic-links';
-import '@react-native-firebase/firestore';
-import '@react-native-firebase/functions';
-import '@react-native-firebase/iid';
-import '@react-native-firebase/in-app-messaging';
-import '@react-native-firebase/indexing';
-import '@react-native-firebase/messaging';
-import '@react-native-firebase/ml-natural-language';
-import '@react-native-firebase/ml-vision';
-import '@react-native-firebase/perf';
-import '@react-native-firebase/remote-config';
-import '@react-native-firebase/storage';
-import jet from 'jet/platform/react-native';
+/* eslint-disable import/extensions,import/no-unresolved,import/first */
 import React, { Component } from 'react';
-import { AppRegistry, Image, NativeModules, StyleSheet, Text, View } from 'react-native';
+import {
+  AppRegistry,
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  YellowBox,
+} from 'react-native';
 
-jet.exposeContextProperty('NativeModules', NativeModules);
-jet.exposeContextProperty('NativeEventEmitter', NativeEventEmitter);
-jet.exposeContextProperty('module', firebase);
+YellowBox.ignoreWarnings(['Require cycle:']);
+
+import firebase from 'react-native-firebase';
+import jet from 'jet/platform/react-native';
 
 class Root extends Component {
   constructor(props) {
@@ -51,33 +22,12 @@ class Root extends Component {
     };
 
     jet.exposeContextProperty('root', this);
+    jet.exposeContextProperty('module', firebase);
   }
 
   render() {
     const { currentTest } = this.state;
-
-    if (!currentTest) {
-      return (
-        <View style={[styles.container, styles.horizontal]}>
-          <Image
-            source={{
-              uri:
-                'https://github.com/invertase/react-native-firebase-starter/raw/master/assets/ReactNativeFirebase.png',
-            }}
-            style={[styles.logo]}
-          />
-          <Text style={[styles.item, styles.module]} testID="module">
-            {'No Tests Started'}
-          </Text>
-          <Text style={styles.item} testID="group">
-            {'N/A'}
-          </Text>
-          <Text style={styles.item} testID="title">
-            {"Ensure you're running the Jet Packager together with the Detox test command."}
-          </Text>
-        </View>
-      );
-    }
+    if (!currentTest) return null;
 
     const module = (() => {
       if (currentTest.parent && currentTest.parent.parent) {
@@ -160,7 +110,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 120,
     marginBottom: 16,
-    width: 135,
+    width: 120,
   },
 });
 

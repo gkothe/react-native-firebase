@@ -1,8 +1,9 @@
 --recursive
---timeout 260000
+--timeout 120000
 --reporter spec
---slow 2000
---retries 5
+--slow 1000
+--retries 2
 --bail
 --exit
---require node_modules/jet/platform/node
+--require jet/platform/node
+--require ./helpers

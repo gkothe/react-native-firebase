@@ -6,7 +6,7 @@
       {
         "instrument": true,
         "relativePath": false,
-        "include": ["**/packages/**"],
+        "include": ["**/src/**"],
         "useInlineSourceMaps": false
       }
     ]

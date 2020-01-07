@@ -1,12 +1,6 @@
 <!---
-EXPO USERS: We have no support in place for using React Native Firebase in Expo applications (ejected or otherwise).
-If you are seeing an issue, it may most likely not be an issue with React Native Firebase itself, but with the Expo runtime or with an incorrect React Native Firebase setup. For support on how to use Firebase with Expo, you should contact the Expo team or the Expo community.
-General Expo issues are no longer be allowed on the React Native Firebase issue tracker. If you've investigated the Expo runtime or your app and found a genuine issue with React Native Firebase, please continue to open an issue.
---->
-
-<!---
 Hello there you awesome person;
-Please note that the issue list of this repo is exclusively for bug reports;
+This issue list of this repo is exclusively for bug reports.
 
 1) For feature requests please visit our [Feature Request Board](https://boards.invertase.io/react-native-firebase).
 2) For questions and support please use our Discord chat: https://discord.gg/C9aK28N or Stack Overflow: https://stackoverflow.com/questions/tagged/react-native-firebase
@@ -16,17 +10,13 @@ Please note that the issue list of this repo is exclusively for bug reports;
 <!-- NOTE: You can change any of the `[ ]` to `[x]` to mark an option(s) as selected -->
 
 <!-- PLEASE DO NOT REMOVE ANY SECTIONS FROM THIS ISSUE TEMPLATE   -->
-<!--   Leave them as they are even if they're irrelevant to your issue -->
+<!--   Leave them as they are if they're irrelevant to your issue -->
 
 ## Issue
 
 <!-- Please describe your issue here --^ and provide as much detail as you can. -->
 <!-- Include code snippets that show your usages of the library in the context of your project. -->
 <!-- Snippets that also show how and where the library is imported in JS are useful to debug issues relating to importing or methods not found issues -->
-
-
-Describe your issue here
-
 
 ---
 
@@ -43,9 +33,6 @@ Describe your issue here
 
 ### iOS
 
-<details><summary>Click To Expand</summary>
-<p>
-
 #### `ios/Podfile`:
 
 - [ ] I'm not using Pods
@@ -61,15 +48,9 @@ Describe your issue here
 // N/A
 ```
 
-</p>
-</details>
-
 ---
 
 ### Android
-
-<details><summary>Click To Expand</summary>
-<p>
 
 #### `android/build.gradle`:
 
@@ -101,24 +82,9 @@ Describe your issue here
 <!-- N/A -->
 ```
 
-</p>
-</details>
-
-
 ---
 
 ## Environment
-
-<details><summary>Click To Expand</summary>
-<p>
-
-**`react-native info` output:**
-
-<!-- Please run `react-native info` on your terminal and paste the contents into the code block below -->
-
-```
- OUTPUT GOES HERE
-```
 
 <!-- change `[ ]` to `[x]` to select an option(s) -->
 
@@ -128,24 +94,56 @@ Describe your issue here
   - [ ] **iOS** but have not tested behavior on Android
   - [ ] **Android** but have not tested behavior on iOS
   - [ ] Both
+- **If known, the version of the platform are you experiencing the issue on:**
+  - `ADD_SOMETHING_HERE` e.g. iOS 10 or Android API 28
+- **Operating System:**
+  - [ ] MacOS, version: `N/A`
+  - [ ] Windows, version: `N/A`
+  - [ ] Other, please specify: `N/A`
+- **Build Tools:**
+  - `ADD_SOMETHING_HERE`
+- **`React Native` version:**
+  - `ADD_SOMETHING_HERE`
+- **`React Native Firebase` library version:**
+  - `ADD_SOMETHING_HERE`
 - **`Firebase` module(s) you're using that has the issue:**
-  - `e.g. Instance ID`
+  - [x] **N/A**
+  - [ ] Authentication
+  - [ ] Analytics
+  - [ ] Cloud **Firestore**
+  - [ ] Cloud **Messaging** (FCM)
+  - [ ] Crashlytics
+  - [ ] Dynamic **Links**
+  - [ ] **Functions** Callable
+  - [ ] Invites
+  - [ ] Instance ID
+  - [ ] Notifications
+  - [ ] Performance Monitoring
+  - [ ] Realtime **Database**
+  - [ ] Remote **Config**
+  - [ ] Storage
+  - [ ] In App Messaging
 - **Are you using `TypeScript`?**
-  - `Y/N`
-  
-</p>
-</details>
-
+  - [ ] No
+  - [ ] Yes, version: `N/A`
+- **Are you using Expo, e.g. `ExpoKit`?**
+  - [x] No
+  - [ ] Yes, I've _not_ ejected
+  - [ ] Yes, but I **have** ejected to `ExpoKit`
+  - [ ] Yes, but I **have** ejected to vanilla React Native
+  - Expo version: `N/A`
 
 <!-- Thanks for reading this far down ❤️  -->
-<!-- High quality, detailed issues are much easier to triage for maintainers -->
+<!-- High quality, detailed issues are much easier and quicker to triage for maintainers -->
 
-<!-- For bonus points, if you put a 🔥 (:fire:) emojii at the start of the issue title we'll know -->
-<!-- that you took the time to fill this out correctly, or, at least read this far -->
+<!-- For bonus points, if you put a 🔥 (:fire:) emojii in the issue title we'll know -->
+<!-- that you actually took the time to fill this out correctly, or at least read this far -->
 
 ---
 
-Think `react-native-firebase` is great? Please consider supporting all of the project maintainers and contributors by donating via our [Open Collective](https://opencollective.com/react-native-firebase/donate) where all contributors can submit expenses. [[Learn More]](https://invertase.io/oss/react-native-firebase/contributing/donations-expenses)
+Think `react-native-firebase` is great? Please consider supporting the project with any of the below:
 
-- 👉 Check out [`React Native Firebase`](https://twitter.com/rnfirebase) and [`Invertase`](https://twitter.com/invertaseio) on Twitter for updates on the library.
-
+- 👉 Donate via [Open Collective](https://opencollective.com/react-native-firebase/donate)
+- 👉 Follow [`React Native Firebase`](https://twitter.com/rnfirebase) and [`Invertase`](https://twitter.com/invertaseio) on Twitter
+- 👉 Star this repo on GitHub ⭐️
+- 👉 Contribute; see our [contributing guide](/CONTRIBUTING.md)

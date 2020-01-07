@@ -6,7 +6,8 @@ Our tests are powered by [Jet ✈️](https://github.com/invertase/jet).
 
 ## Requirements
 
-- Make sure you have Xcode installed (tested with Xcode 10+).
+- Make sure you have Xcode installed (tested with Xcode 9.2+).
+- With Xcode 10+ ensure build mode is set to `Legacy Build`
 - Make sure you have NodeJS installed (Node 8.4.0 and up is required).
 - Make sure you have all required dependencies installed:
 
@@ -17,26 +18,30 @@ Our tests are powered by [Jet ✈️](https://github.com/invertase/jet).
     brew install wix/brew/applesimutils
     ```
 
-> **Note**: If Homebrew complains about a conflict in the `wix/brew` tap, run `brew untap wix/brew && brew tap wix/brew` and try installing again
-
----
-
-## Cleaning dependencies
-
-You might find yourself in a situation where you want to start from a clean slate. The following will delete all `node_modules` and project `build` folders.
-
-```bash
-yarn lerna:clean
-yarn build:all:clean
-```
-
 ---
 
 ### Step 1: Install test project dependencies
 
+Yarn install at project root and also inside tests directory.
+
+Also install tests project iOS Pods.
+
 ```bash
 yarn
-yarn tests:ios:pod:install
+cd tests/ && yarn  # see note below for XCode 10.2
+cd ios && pod install --repo-update
+```
+
+Note: the `cd tests/ && yarn` will fail the first time with XCode 10.2. You must edit `node_modules/detox/ios_src/Detox.xcodeproj/project.pbxproj` and alter the 4 `SWIFT_VERSION = 3.0` entries to be `SWIFT_VERSION = 4.0` So for XCode 10.2 you need this:
+
+```bash
+yarn
+cd tests/ && yarn  # this will fail with partial install of detox
+patch -p1 < manual-patches/detox+9.1.2.patch  # alter SWIFT_VERSION to 4.0
+patch -p1 < manual-patches/detox+9.1.2-no-extract.patch # do not re-extract iOS source
+./node_modules/detox/scripts/build_framework.ios.sh # build the patched iOS framework
+yarn # Now re-run and the build works
+cd ios && pod install --repo-update
 ```
 
 ---
@@ -46,7 +51,7 @@ yarn tests:ios:pod:install
 Start the React Native packager using the script provided;
 
 ```bash
-yarn tests:packager:jet
+cd tests/ && yarn run packager-jet
 ```
 
 > ⚠️ It must be this script only that starts the RN Packager, using the default RN packager command will not work.
@@ -66,27 +71,18 @@ As always; the first build for each platform will take a while. Subsequent build
 #### Android
 
 ```bash
-yarn tests:android:build
+cd tests/ && yarn run build-android
 ```
 
 #### iOS
 
 ```bash
-yarn tests:ios:build
+cd tests/ && yarn run build-ios
 ```
 
 ---
 
-### Step 4: Setting up android emulator and iOS simulator
-
-To run android tests you will need to create a new emulator and name it `TestingAVD` (You can't rename existing one).
-This emulator will need to be up and running before you start your android tests from Step 5.
-
-With iOS Detox will start a simulator for you by default or run tests in an open one.
-
----
-
-### Step 5: Finally, run the tests
+### Step 4: Finally, run the tests
 
 This action will launch a new simulator (if not already open) and run the tests on it.
 
@@ -101,21 +97,21 @@ This action will launch a new simulator (if not already open) and run the tests 
 #### Android
 
 ```bash
-yarn tests:android:test
+cd tests/ && yarn run test-android
 ```
 
 #### iOS
 
 ```bash
-yarn tests:ios:test
+cd tests/ && yarn run test-ios
 ```
 
-The `tests:${platform}:test` commands uninstall any existing app and installs a fresh copy. You can
-run `tests:${platform}:test-reuse` instead if you don't need to re-install the app (i.e only making JS code changes).
+The `test-${platform}` commands uninstall any existing app and installs a fresh copy. You can
+run `test-${platform}-reuse` instead if you don't need to re-install the app (i.e only making JS code changes).
 Just remember to use `test-${platform}` if you made native code changes and rebuilt - after installing once you can
 go back to using the `reuse` variant.
 
-The `tests:${platform}:cover` variant of the yarn scripts will additionally run tests with coverage.
+The `cover` variant of the yarn scripts will additionally run tests with coverage.
 Coverage is output to the root directory of the project: `react-native-firebase/coverage`,
 open `react-native-firebase/coverage/lcov-report/index.html` in your browser after running tests
 to view detailed coverage output.
@@ -131,31 +127,3 @@ Another way to do this is via adding a `--grep` option to e2e/mocha.opts file, e
 > 💡 Don't forget to remove these before committing your code and submitting a pull request
 
 For more Mocha options see https://mochajs.org/#usage
-
----
-
-### Linting & Typechecking files
-
-Runs eslint and respective type checks on project files
-
-```bash
-yarn validate:all:js
-yarn validate:all:ts
-yarn validate:all:flow
-```
-
----
-
-<p>
-  <img align="left" width="75px" src="https://static.invertase.io/assets/invertase-logo-small.png"> 
-  <p align="left">  
-    Built and maintained with 💛 by <a href="https://invertase.io">Invertase</a>.
-  </p>
-  <p align="left">  
-    <a href="https://invertase.io/hire-us">💼 Hire Us</a> | 
-    <a href="https://opencollective.com/react-native-firebase">☕️ Sponsor Us</a> | 
-    <a href="https://opencollective.com/jobs">‍💻 Work With Us</a>
-  </p>
-</p>
-
----
